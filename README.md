@@ -89,3 +89,6 @@ Both CNN and Bi-LSTM models performed effectively in detecting sequence discrepa
 - Expand dataset to include **insertions, deletions, and SNPs** explicitly
 
 ---
+
+## Infographic Website
+https://umeshtharukaofficial.github.io/genome-error-detection/
