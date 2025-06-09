@@ -3,426 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infographic: The Quest for Genomic Perfection</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <!-- 
-    Infographic Plan Summary:
-    Narrative Structure:
-    1.  Hero: Introduce the core challenge of genome assembly accuracy.
-    2.  The Problem: Detail the inherent challenges in genomics (repeats, heterozygosity).
-    3.  The Toolkit: Explain DNA representation methods for ML (K-mers, Embeddings).
-    4.  The Classifiers: Compare the performance of ML models (CNN, Bi-LSTM, RF).
-    5.  The Workflow: Visualize the end-to-end error detection process.
-    6.  Evaluation Metrics: Explain why advanced metrics (Precision, Recall, F1) are crucial.
-    7.  Future Outlook: Summarize the future of AI in genomics.
-
-    Visualization Choices (NO SVG / NO MERMAID JS):
-    -   Key Performance Stat -> Single Big Number -> Inform -> Large, bold text.
-    -   Model Performance Comparison -> Bar Chart -> Compare -> Chart.js (Canvas).
-    -   Multi-metric Model Eval -> Radar Chart -> Compare -> Chart.js (Canvas).
-    -   DNA Representation Methods -> Cards with Icons -> Organize -> HTML/CSS with Unicode.
-    -   Error Detection Workflow -> Flowchart -> Organize -> Structured HTML/CSS with Tailwind.
-    -   Precision vs. Recall -> Donut Charts -> Inform -> Chart.js (Canvas).
-    -   Genomic Challenges -> Cards with Icons -> Organize -> HTML/CSS with Unicode.
-    -   All constraints met. No SVG or Mermaid JS used.
-    
-    Color Palette Selection:
-    -   Name: Energetic & Playful
-    -   HEX Codes: #005f73 (Primary), #0a9396 (Secondary), #94d2bd (Accent 1), #e9d8a6 (Accent 2), #ee9b00 (Highlight), #ca6702, #bb3e03, #ae2012, #9b2226 (Warning/Error Tones).
-    -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 320px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-    </style>
+    <title>🧬 Genome Assembly Error Detection | ML Project</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="text-gray-800">
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container flex justify-between items-center">
+            <div class="nav__logo">🧬 GenomeML</div>
+            <ul class="nav__menu flex gap-16">
+                <li><a href="#hero" class="nav__link">Home</a></li>
+                <li><a href="#overview" class="nav__link">Overview</a></li>
+                <li><a href="#architecture" class="nav__link">Architecture</a></li>
+                <li><a href="#performance" class="nav__link">Results</a></li>
+                <li><a href="#features" class="nav__link">Features</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <div class="container mx-auto p-4 md:p-8">
-
-        <header class="text-center py-12">
-            <h1 class="text-4xl md:text-6xl font-black text-[#005f73] text-shadow">The Quest for Genomic Perfection</h1>
-            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Harnessing Machine Learning to Detect Elusive Errors in Genome Assembly</p>
-        </header>
-
-        <main class="space-y-12">
-
-            <section id="problem" class="bg-white rounded-2xl shadow-lg p-6 md:p-10">
-                <h2 class="text-3xl font-bold text-center mb-2 text-[#0a9396]">The Challenge of a Perfect Blueprint</h2>
-                <p class="text-center text-gray-600 mb-8 max-w-4xl mx-auto">Assembling a genome is like piecing together a billion-piece puzzle with no picture on the box. Inherent complexities in DNA and technological limitations introduce subtle but critical errors, compromising downstream scientific discovery.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-blue-50/50 border border-blue-200 rounded-lg p-6 text-center">
-                        <div class="text-4xl mb-4">🧬🔂🧬</div>
-                        <h3 class="font-bold text-xl text-[#005f73]">Repetitive Elements</h3>
-                        <p class="text-gray-600 mt-2">Vast, repetitive sequences act like puzzle pieces with the same pattern, making them notoriously difficult to place correctly, often leading to assembly collapse or expansion.</p>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero__background">
+            <div class="dna-helix"></div>
+            <div class="dna-helix dna-helix--delayed"></div>
+        </div>
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title">🧬 Genome Assembly Error Detection</h1>
+                <p class="hero__subtitle">Detecting Sequence Discrepancies using Deep Learning and Machine Learning</p>
+                <div class="hero__stats">
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="92">0</div>
+                        <div class="stat-label">% Accuracy</div>
                     </div>
-                    <div class="bg-teal-50/50 border border-teal-200 rounded-lg p-6 text-center">
-                        <div class="text-4xl mb-4">🌗</div>
-                        <h3 class="font-bold text-xl text-[#0a9396]">Heterozygosity</h3>
-                        <p class="text-gray-600 mt-2">Differences between parental chromosomes can confuse assemblers, causing them to incorrectly separate or merge DNA segments, creating artificial duplications.</p>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="5">0</div>
+                        <div class="stat-label">ML Models</div>
                     </div>
-                    <div class="bg-yellow-50/50 border border-yellow-300 rounded-lg p-6 text-center md:col-span-2 lg:col-span-1">
-                        <div class="text-4xl mb-4">🔬⚠️</div>
-                        <h3 class="font-bold text-xl text-[#ee9b00]">Technological Biases</h3>
-                        <p class="text-gray-600 mt-2">Sequencing technologies can struggle with regions of extreme GC or AT content, creating "genomic dark matter"—areas systematically missing from assemblies.</p>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="workflow" class="bg-white rounded-2xl shadow-lg p-6 md:p-10">
-                <h2 class="text-3xl font-bold text-center mb-8 text-[#0a9396]">Our Machine Learning Workflow for Error Detection</h2>
-                <p class="text-center text-gray-600 mb-10 max-w-4xl mx-auto">We've developed a multi-stage pipeline that transforms raw DNA sequences into actionable insights, precisely identifying potential assembly errors. This process integrates feature engineering, model training, and rigorous evaluation.</p>
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8">
-                    <div class="text-center flex flex-col items-center">
-                        <div class="w-24 h-24 bg-[#94d2bd] rounded-full flex items-center justify-center text-3xl text-white shadow-md">📄</div>
-                        <h3 class="font-bold mt-4 text-lg">1. Input Data</h3>
-                        <p class="text-sm text-gray-500 max-w-xs">Pairs of DNA sequences are ingested, where one is the reference and the other is the assembled contig to be checked.</p>
-                    </div>
-                    <div class="text-5xl text-[#94d2bd] hidden md:block transform -translate-y-4">→</div>
-                    <div class="text-5xl text-[#94d2bd] md:hidden transform rotate-90">→</div>
-                    <div class="text-center flex flex-col items-center">
-                        <div class="w-24 h-24 bg-[#0a9396] rounded-full flex items-center justify-center text-3xl text-white shadow-md">🔢</div>
-                        <h3 class="font-bold mt-4 text-lg">2. Feature Engineering</h3>
-                        <p class="text-sm text-gray-500 max-w-xs">Sequences are converted into numerical formats (K-mers, One-Hot Encoding) that machine learning models can understand.</p>
-                    </div>
-                    <div class="text-5xl text-[#0a9396] hidden md:block transform -translate-y-4">→</div>
-                    <div class="text-5xl text-[#0a9396] md:hidden transform rotate-90">→</div>
-                    <div class="text-center flex flex-col items-center">
-                        <div class="w-24 h-24 bg-[#005f73] rounded-full flex items-center justify-center text-3xl text-white shadow-md">🤖</div>
-                        <h3 class="font-bold mt-4 text-lg">3. Model Training</h3>
-                        <p class="text-sm text-gray-500 max-w-xs">Models like Bi-LSTMs and CNNs are trained to learn the patterns that distinguish identical pairs from those with discrepancies.</p>
-                    </div>
-                     <div class="text-5xl text-[#005f73] hidden md:block transform -translate-y-4">→</div>
-                     <div class="text-5xl text-[#005f73] md:hidden transform rotate-90">→</div>
-                    <div class="text-center flex flex-col items-center">
-                        <div class="w-24 h-24 bg-[#ca6702] rounded-full flex items-center justify-center text-3xl text-white shadow-md">🎯</div>
-                        <h3 class="font-bold mt-4 text-lg">4. Classification</h3>
-                        <p class="text-sm text-gray-500 max-w-xs">The trained model classifies new sequence pairs as 'Correct' (0) or 'Error' (1), pinpointing discrepancies.</p>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="8">0</div>
+                        <div class="stat-label">Metrics</div>
                     </div>
                 </div>
-            </section>
+                <a href="#overview" class="btn btn--primary btn--lg hero__cta">Explore Project</a>
+            </div>
+        </div>
+    </section>
 
-
-            <section id="models" class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                <div class="lg:col-span-3 bg-white rounded-2xl shadow-lg p-6 md:p-10">
-                    <h2 class="text-3xl font-bold text-center mb-2 text-[#0a9396]">Model Performance Showdown</h2>
-                    <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">We evaluated a suite of machine learning models to identify the most effective classifiers for this task. The results highlight the superior performance of deep learning architectures.</p>
-                    <div class="chart-container">
-                        <canvas id="modelPerformanceChart"></canvas>
-                    </div>
-                     <p class="text-center text-gray-600 mt-8">This comparison clearly shows that deep learning models, particularly the a CNN-BiLSTM hybrid, achieve the highest accuracy in identifying sequence discrepancies. Their ability to understand both local motifs (CNN) and long-range dependencies (Bi-LSTM) proves highly effective.</p>
+    <!-- Project Overview -->
+    <section id="overview" class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Project Overview</h2>
+                <p class="section__subtitle">Advancing genome assembly quality through intelligent error detection</p>
+            </div>
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <h3>Problem Statement</h3>
+                    <p>Genome assembly errors significantly impact downstream analysis in bioinformatics. Our project addresses the critical need for automated detection of sequence discrepancies using advanced machine learning techniques.</p>
                 </div>
-
-                <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg p-6 md:p-10">
-                    <h2 class="text-3xl font-bold text-center mb-2 text-[#0a9396]">A Multi-Faceted View</h2>
-                    <p class="text-center text-gray-600 mb-8">Evaluating models requires looking beyond simple accuracy. This radar chart compares our top models across four critical metrics.</p>
-                    <div class="chart-container h-96 md:h-auto">
-                        <canvas id="modelRadarChart"></canvas>
-                    </div>
-                     <p class="text-center text-gray-600 mt-8">The radar chart reveals the balanced strength of the CNN-BiLSTM model. It not only leads in accuracy but also maintains high precision and recall, resulting in a superior F1-Score, which is crucial for imbalanced datasets common in genomics.</p>
+                <div class="overview-card">
+                    <h3>Solution Approach</h3>
+                    <p>We developed a hybrid approach combining deep learning models (CNN, Bi-LSTM) with traditional machine learning methods to achieve superior error detection performance.</p>
                 </div>
-            </section>
+                <div class="overview-card">
+                    <h3>Impact & Applications</h3>
+                    <p>This research enables better genome assembly quality control, supports bioinformatics pipeline integration, and serves as an educational tool for sequence analysis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Technical Approach -->
+    <section id="approach" class="section section--alt">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Technical Approach</h2>
+                <p class="section__subtitle">Hybrid machine learning methodology for optimal performance</p>
+            </div>
+            <div class="approach-grid">
+                <div class="tech-card" data-model="cnn">
+                    <div class="tech-card__icon">🧠</div>
+                    <h3>Convolutional Neural Network</h3>
+                    <p>Pattern detection in genomic sequences using specialized convolutional layers</p>
+                    <div class="tech-stats">
+                        <span class="accuracy-badge">89% Accuracy</span>
+                    </div>
+                </div>
+                <div class="tech-card" data-model="bilstm">
+                    <div class="tech-card__icon">🔄</div>
+                    <h3>Bidirectional LSTM</h3>
+                    <p>Sequential dependency modeling for enhanced sequence understanding</p>
+                    <div class="tech-stats">
+                        <span class="accuracy-badge accuracy-badge--best">92% Accuracy</span>
+                    </div>
+                </div>
+                <div class="tech-card" data-model="traditional">
+                    <div class="tech-card__icon">📊</div>
+                    <h3>Traditional ML Models</h3>
+                    <p>Random Forest, XGBoost, and Logistic Regression with k-mer features</p>
+                    <div class="tech-stats">
+                        <span class="accuracy-badge">85% Avg Accuracy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <section id="metrics">
-                 <h2 class="text-3xl font-bold text-center mb-2 text-[#0a9396]">Why Accuracy Isn't Enough</h2>
-                <p class="text-center text-gray-600 mb-8 max-w-4xl mx-auto">In genomics, errors are rare. A model that always guesses 'no error' could be 99% accurate but useless. We must focus on metrics that handle this class imbalance, like Precision and Recall.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-10">
-                        <h3 class="text-2xl font-bold text-center mb-4 text-[#005f73]">Precision: The Quality of Predictions</h3>
-                        <p class="text-center text-gray-600 mb-6">Of all the times we predicted an error, how often were we right? High precision minimizes false alarms.</p>
-                        <div class="chart-container h-64 md:h-72">
-                            <canvas id="precisionDonut"></canvas>
+    <!-- Model Architecture -->
+    <section id="architecture" class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Model Architecture</h2>
+                <p class="section__subtitle">Deep learning pipeline for genome error detection</p>
+            </div>
+            <div class="architecture-container">
+                <div class="architecture-diagram">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1749394582/gpt4o_images/b9axwvpbugnza4vmpgty.png" alt="CNN-LSTM Architecture" class="architecture-image">
+                </div>
+                <div class="pipeline-diagram">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1749394631/gpt4o_images/ejecltpyhpcyabz1ncbo.png" alt="DNA Preprocessing Pipeline" class="pipeline-image">
+                </div>
+            </div>
+            <div class="pipeline-steps">
+                <div class="pipeline-step">
+                    <div class="step-number">1</div>
+                    <h4>Data Preprocessing</h4>
+                    <p>One-hot encoding and sequence validation</p>
+                </div>
+                <div class="pipeline-step">
+                    <div class="step-number">2</div>
+                    <h4>Feature Extraction</h4>
+                    <p>CNN layer pattern detection and k-mer analysis</p>
+                </div>
+                <div class="pipeline-step">
+                    <div class="step-number">3</div>
+                    <h4>Sequential Analysis</h4>
+                    <p>Bi-LSTM for temporal dependencies</p>
+                </div>
+                <div class="pipeline-step">
+                    <div class="step-number">4</div>
+                    <h4>Classification</h4>
+                    <p>Binary error/match prediction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Results -->
+    <section id="performance" class="section section--alt">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Performance Results</h2>
+                <p class="section__subtitle">Comprehensive evaluation across multiple metrics</p>
+            </div>
+            <div class="performance-container">
+                <div class="chart-container">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1749394431/pplx_code_interpreter/9e87a35c_i99nwj.jpg" alt="Model Performance Comparison" class="performance-chart">
+                </div>
+                <div class="roc-container">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1749394535/pplx_code_interpreter/868da232_u7rfre.jpg" alt="ROC Curves" class="roc-chart">
+                </div>
+            </div>
+            <div class="model-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-model="bilstm">Bi-LSTM</button>
+                    <button class="tab-button" data-model="cnn">CNN</button>
+                    <button class="tab-button" data-model="xgboost">XGBoost</button>
+                    <button class="tab-button" data-model="rf">Random Forest</button>
+                    <button class="tab-button" data-model="lr">Logistic Regression</button>
+                </div>
+                <div class="tab-content">
+                    <div class="model-metrics active" data-model="bilstm">
+                        <div class="metric-grid">
+                            <div class="metric-item">
+                                <div class="metric-value">92%</div>
+                                <div class="metric-label">Accuracy</div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: 92%"></div></div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value">90%</div>
+                                <div class="metric-label">Precision</div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value">94%</div>
+                                <div class="metric-label">Recall</div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: 94%"></div></div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-value">96%</div>
+                                <div class="metric-label">ROC-AUC</div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: 96%"></div></div>
+                            </div>
                         </div>
-                        <p class="text-center text-gray-600 mt-6">This chart illustrates precision as the ratio of True Positives to all positive predictions. It's a measure of exactness.</p>
-                    </div>
-                    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-10">
-                        <h3 class="text-2xl font-bold text-center mb-4 text-[#ee9b00]">Recall: The Quantity of Detections</h3>
-                        <p class="text-center text-gray-600 mb-6">Of all the actual errors that exist, how many did we find? High recall minimizes missed errors.</p>
-                        <div class="chart-container h-64 md:h-72">
-                            <canvas id="recallDonut"></canvas>
-                        </div>
-                         <p class="text-center text-gray-600 mt-6">Recall is visualized as the ratio of True Positives to all actual positives in the data. It's a measure of completeness.</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
 
-             <section id="future" class="text-center py-12 bg-gradient-to-r from-[#005f73] to-[#0a9396] rounded-2xl shadow-lg text-white">
-                <h2 class="text-3xl md:text-4xl font-black text-shadow">The Future is AI-Driven Genomics</h2>
-                <p class="mt-4 text-lg md:text-xl opacity-90 max-w-3xl mx-auto">This research is just the beginning. The integration of AI into genomics will lead to more robust assemblies, deeper biological insights, and accelerated progress in personalized medicine.</p>
-                <div class="mt-8 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#problem" class="bg-[#ee9b00] text-white font-bold py-3 px-8 rounded-full hover:bg-[#ca6702] transition duration-300 shadow-lg">Explore the Data Again</a>
-                    <a href="https://github.com/umeshtharukaofficial/genome-error-detection" target="_blank" class="bg-white text-[#005f73] font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300 shadow-lg border border-[#005f73]">View GitHub Repository</a>
+    <!-- Key Features -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Key Features</h2>
+                <p class="section__subtitle">Comprehensive genome error detection capabilities</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3>Automated Dataset Extraction</h3>
+                    <p>Reads and extracts DNA alignment datasets from ZIP archives with dynamic file detection</p>
                 </div>
-            </section>
-        </main>
-    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Advanced Preprocessing</h3>
+                    <p>Cleans, validates, and preprocesses sequence data with one-hot encoding</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Binary Classification</h3>
+                    <p>Derives labels by comparing sequence pairs to identify errors vs identical matches</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Deep Learning Architectures</h3>
+                    <p>CNN for pattern detection and Bi-LSTM for sequential dependencies</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Traditional ML Models</h3>
+                    <p>Logistic Regression and Random Forest with k-mer feature extraction</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Comprehensive Evaluation</h3>
+                    <p>Multiple metrics including ROC-AUC, PR-AUC, MCC, and cross-validation</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
+    <!-- Dataset Information -->
+    <section id="dataset" class="section section--alt">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Dataset Information</h2>
+                <p class="section__subtitle">Comprehensive genome sequence dataset structure</p>
+            </div>
+            <div class="dataset-info">
+                <div class="dataset-card">
+                    <h3>Data Source</h3>
+                    <p>Manually uploaded ZIP dataset</p>
+                    <div class="dataset-path">ALLdataset/dataset3T/csv3testdata.csv</div>
+                </div>
+                <div class="dataset-card">
+                    <h3>Input Structure</h3>
+                    <p>Two DNA sequences per sample for comparison analysis</p>
+                </div>
+                <div class="dataset-card">
+                    <h3>Output Format</h3>
+                    <p>Binary label classification (match/mismatch)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        const wrapLabel = (label, maxLength = 16) => {
-            const words = label.split(' ');
-            const lines = [];
-            let currentLine = '';
-            words.forEach(word => {
-                if ((currentLine + ' ' + word).length > maxLength) {
-                    lines.push(currentLine.trim());
-                    currentLine = word;
-                } else {
-                    currentLine += ' ' + word;
-                }
-            });
-            lines.push(currentLine.trim());
-            return lines.map(l => l.trim()).filter(l => l.length > 0);
-        };
-        
-        const tooltipTitleCallback = (tooltipItems) => {
-            const item = tooltipItems[0];
-            let label = item.chart.data.labels[item.dataIndex];
-            if (Array.isArray(label)) {
-              return label.join(' ');
-            } else {
-              return label;
-            }
-        };
+    <!-- Future Work -->
+    <section id="future" class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Future Work</h2>
+                <p class="section__subtitle">Roadmap for enhanced genome error detection</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>Transformer Models</h4>
+                        <p>Implementation of DNABERT and Bioformer for enhanced sequence understanding</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>Error Localization</h4>
+                        <p>Transition from binary classification to precise error position identification</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>Web Interface</h4>
+                        <p>Interactive web application and REST API for real-time analysis</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h4>Extended Analysis</h4>
+                        <p>Support for insertions, deletions, and SNPs beyond basic mismatches</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        const sharedChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#374151',
-                        font: {
-                            size: 14,
-                            family: 'Inter, sans-serif'
-                        }
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        title: tooltipTitleCallback
-                    },
-                    backgroundColor: '#005f73',
-                    titleFont: {
-                        size: 16,
-                        weight: 'bold'
-                    },
-                    bodyFont: {
-                        size: 14
-                    },
-                    padding: 12,
-                    cornerRadius: 8
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: '#e5e7eb'
-                    },
-                    ticks: {
-                        color: '#4b5563',
-                        font: {
-                             family: 'Inter, sans-serif'
-                        }
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        color: '#4b5563',
-                         font: {
-                             family: 'Inter, sans-serif'
-                        }
-                    }
-                }
-            }
-        };
-        
-        const modelPerformanceCtx = document.getElementById('modelPerformanceChart').getContext('2d');
-        const modelPerformanceLabels = [
-            'Decision Tree', 
-            'CNN', 
-            'CNN-LSTM', 
-            'CNN Bidirectional LSTM'
-        ].map(l => wrapLabel(l));
-        
-        new Chart(modelPerformanceCtx, {
-            type: 'bar',
-            data: {
-                labels: modelPerformanceLabels,
-                datasets: [{
-                    label: 'Model Accuracy (%)',
-                    data: [95.0, 95.12, 94.36, 93.82],
-                    backgroundColor: ['#94d2bd', '#0a9396', '#005f73', '#ee9b00'],
-                    borderColor: ['#94d2bd', '#0a9396', '#005f73', '#ee9b00'],
-                    borderWidth: 1,
-                    borderRadius: 5
-                }]
-            },
-            options: {
-                 ...sharedChartOptions,
-                 scales: {
-                     ...sharedChartOptions.scales,
-                     y: {
-                         ...sharedChartOptions.scales.y,
-                         suggestedMin: 90,
-                         title: {
-                            display: true,
-                            text: 'Accuracy (%)',
-                            color: '#374151',
-                            font: { size: 14, weight: 'bold' }
-                         }
-                     }
-                 }
-            }
-        });
-        
-        const modelRadarCtx = document.getElementById('modelRadarChart').getContext('2d');
-        new Chart(modelRadarCtx, {
-            type: 'radar',
-            data: {
-                labels: ['Accuracy', 'Precision', 'Recall', 'F1-Score'],
-                datasets: [{
-                    label: 'CNN-BiLSTM',
-                    data: [93.8, 92, 95, 93.5],
-                    backgroundColor: 'rgba(10, 147, 150, 0.2)',
-                    borderColor: '#0a9396',
-                    pointBackgroundColor: '#0a9396',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: '#0a9396'
-                }, {
-                    label: 'CNN',
-                    data: [95.1, 95, 88, 91.4],
-                    backgroundColor: 'rgba(238, 155, 0, 0.2)',
-                    borderColor: '#ee9b00',
-                    pointBackgroundColor: '#ee9b00',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: '#ee9b00'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                 plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: { color: '#374151', font: { size: 14, family: 'Inter, sans-serif' } }
-                    },
-                    tooltip: {
-                         backgroundColor: '#005f73',
-                         titleFont: { size: 16, weight: 'bold' },
-                         bodyFont: { size: 14 },
-                         padding: 12,
-                         cornerRadius: 8
-                    }
-                },
-                scales: {
-                    r: {
-                        angleLines: { color: '#e5e7eb' },
-                        grid: { color: '#e5e7eb' },
-                        pointLabels: { font: { size: 14, family: 'Inter, sans-serif' }, color: '#4b5563' },
-                        ticks: { backdropColor: 'transparent', color: '#4b5563' },
-                        suggestedMin: 80,
-                        suggestedMax: 100
-                    }
-                }
-            }
-        });
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🧬 Genome Error Detection</h4>
+                    <p>Advanced machine learning for genomic sequence analysis</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/umeshtharukaofficial/genome-error-detection" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://umeshtharukaofficial.github.io/genome-error-detection/" target="_blank">Project Website</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Technologies</h4>
+                    <ul>
+                        <li>TensorFlow/Keras</li>
+                        <li>Scikit-learn</li>
+                        <li>Python</li>
+                        <li>Bioinformatics</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Genome Error Detection Project. Machine Learning Research.</p>
+            </div>
+        </div>
+    </footer>
 
-        const precisionDonutCtx = document.getElementById('precisionDonut').getContext('2d');
-        new Chart(precisionDonutCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['True Positives (Correctly Identified Errors)', 'False Positives (False Alarms)'],
-                datasets: [{
-                    data: [85, 15],
-                    backgroundColor: ['#005f73', '#94d2bd'],
-                    borderColor: '#ffffff',
-                    borderWidth: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '60%',
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            title: tooltipTitleCallback
-                        },
-                        backgroundColor: '#005f73',
-                        titleFont: { size: 16, weight: 'bold' },
-                        bodyFont: { size: 14 },
-                        padding: 12,
-                        cornerRadius: 8
-                    }
-                }
-            }
-        });
-        
-        const recallDonutCtx = document.getElementById('recallDonut').getContext('2d');
-        new Chart(recallDonutCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['True Positives (Found Errors)', 'False Negatives (Missed Errors)'],
-                datasets: [{
-                    data: [85, 15],
-                    backgroundColor: ['#ee9b00', '#e9d8a6'],
-                    borderColor: '#ffffff',
-                    borderWidth: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '60%',
-                plugins: {
-                    legend: { display: false },
-                     tooltip: {
-                        callbacks: {
-                            title: tooltipTitleCallback
-                        },
-                        backgroundColor: '#ca6702',
-                        titleFont: { size: 16, weight: 'bold' },
-                        bodyFont: { size: 14 },
-                        padding: 12,
-                        cornerRadius: 8
-                    }
-                }
-            }
-        });
-    });
-</script>
-
+    <script src="app.js"></script>
 </body>
 </html>
